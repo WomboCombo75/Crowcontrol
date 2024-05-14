@@ -1,2 +1,2 @@
 # Crowcontrol
-A basic Plantcrow control Website with Xiaomi HHCC Sensors
+A simple plant care control website featuring Xiaomi HHCC sensors
