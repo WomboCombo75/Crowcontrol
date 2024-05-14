@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wetter City</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: url('/path/to/backgroundimage');
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 50px auto;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .box {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #fff;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .column {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Column -->
+        <div class="column">
+            <div class="box">
+                <h1>Weather Box</h1>
+                <table id="weather">
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Wert</th>
+                    </tr>
+                    <tr>
+                        <td>Temperatur (°C)</td>
+                        <td id="temperature">-</td>
+                    </tr>
+                    <tr>
+                        <td>Gefühlt (°C)</td>
+                        <td id="feels_like">-</td>
+                    </tr>
+                    <tr>
+                        <td>Luftdruck (hPa)</td>
+                        <td id="pressure">-</td>
+                    </tr>
+                    <tr>
+                        <td>Luftfeuchtigkeit (%)</td>
+                        <td id="humidity">-</td>
+                    </tr>
+                    <tr>
+                        <td>Windgeschwindigkeit (m/s)</td>
+                        <td id="wind_speed">-</td>
+                    </tr>
+                    <tr>
+                        <td>Wetter</td>
+                        <td id="description">-</td>
+                    </tr>
+                    <tr>
+                        <td>Sonnenaufgang</td>
+                        <td id="sunrise">-</td>
+                    </tr>
+                    <tr>
+                        <td>Sonnenuntergang</td>
+                        <td id="sunset">-</td>
+                    </tr>
+                    <tr>
+                        <td>Niederschlag (mm/s)</td>
+                        <td id="rain">-</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="box">
+                <h1>Batteriestatus</h1>
+                <table id="battery">
+                    <tr>
+                        <th>Pflanze</th>
+                        <th>Batterie (%)</th>
+                    </tr>
+                    <tr>
+                        <td>Hindu Kush</td>
+                        <td id="battery_hindu">-</td>
+                    </tr>
+                    <tr>
+                        <td>Northern Lights</td>
+                        <td id="battery_northern">-</td>
+                    </tr>
+                    <tr>
+                        <td>Purple Haze</td>
+                        <td id="battery_purple">-</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="column">
+            <div class="box">
+                <h1>Sensor1</h1>
+                <table id="hindu">
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Wert</th>
+                    </tr>
+                    <tr>
+                        <td>Temperatur (°C)</td>
+                        <td id="temperature_hindu">-</td>
+                    </tr>
+                    <tr>
+                        <td>Feuchtigkeit (%)</td>
+                        <td id="moisture_hindu">-</td>
+                    </tr>
+                    <tr>
+                        <td>Licht (Lux)</td>
+                        <td id="light_hindu">-</td>
+                    </tr>
+                    <tr>
+                        <td>Leitfähigkeit (μS/cm)</td>
+                        <td id="conductivity_hindu">-</td>
+                    </tr>
+                </table>
+                <canvas id="temperatureChartHindu"></canvas>
+                <canvas id="moistureChartHindu"></canvas>
+            </div>
+
+            <div class="box">
+                <h1>Sensor2</h1>
+                <table id="northern">
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Wert</th>
+                    </tr>
+                    <tr>
+                        <td>Temperatur (°C)</td>
+                        <td id="temperature_northern">-</td>
+                    </tr>
+                    <tr>
+                        <td>Feuchtigkeit (%)</td>
+                        <td id="moisture_northern">-</td>
+                    </tr>
+                    <tr>
+                        <td>Licht (Lux)</td>
+                        <td id="light_northern">-</td>
+                    </tr>
+                    <tr>
+                        <td>Leitfähigkeit (μS/cm)</td>
+                        <td id="conductivity_northern">-</td>
+                    </tr>
+                </table>
+                <canvas id="temperatureChartNorthern"></canvas>
+                <canvas id="moistureChartNorthern"></canvas>
+            </div>
+
+            <div class="box">
+                <h1>>Sensor3</h1>
+                <table id="purple">
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Wert</th>
+                    </tr>
+                    <tr>
+                        <td>Temperatur (°C)</td>
+                        <td id="temperature_purple">-</td>
+                    </tr>
+                    <tr>
+                        <td>Feuchtigkeit (%)</td>
+                        <td id="moisture_purple">-</td>
+                    </tr>
+                    <tr>
+                        <td>Licht (Lux)</td>
+                        <td id="light_purple">-</td>
+                    </tr>
+                    <tr>
+                        <td>Leitfähigkeit (μS/cm)</td>
+                        <td id="conductivity_purple">-</td>
+                    </tr>
+                </table>
+                <canvas id="temperatureChartPurple"></canvas>
+                <canvas id="moistureChartPurple"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Universal Chart Creation
+        function createChart(ctxId, label, data, labels, bgColor, borderColor, minVal, maxVal) {
+            var ctx = document.getElementById(ctxId).getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: label,
+                        data: data,
+                        backgroundColor: bgColor,
+                        borderColor: borderColor,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            min: minVal,
+                            max: maxVal
+                        }
+                    }
+                }
+            });
+        }
+
+        // Fetching Weather Data
+        function fetchWeatherData() {
+            fetchData('PATH/to/weatherdata', updateWeatherTable);
+        }
+
+        function updateWeatherTable(responseText) {
+            var data = JSON.parse(responseText);
+            document.getElementById('temperature').innerText = (data.main.temp - 273.15).toFixed(2) + ' °C';
+            document.getElementById('feels_like').innerText = (data.main.feels_like - 273.15).toFixed(2) + ' °C';
+            document.getElementById('pressure').innerText = data.main.pressure + ' hPa';
+            document.getElementById('humidity').innerText = data.main.humidity + ' %';
+            document.getElementById('wind_speed').innerText = data.wind.speed + ' m/s';
+            document.getElementById('description').innerText = translateDescription(data.weather[0].description);
+            document.getElementById('sunrise').innerText = new Date(data.sys.sunrise * 1000).toLocaleTimeString();
+            document.getElementById('sunset').innerText = new Date(data.sys.sunset * 1000).toLocaleTimeString();
+            document.getElementById('rain').innerText = (data.rain && data.rain['1h']) ? data.rain['1h'] + ' mm' : 'Kein Regen';
+        }
+
+        // Fetch Data Function
+        function fetchData(url, updateFunction) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    updateFunction(xhr.responseText);
+                }
+            };
+            xhr.onerror = function() {
+                console.error(`Error fetching data from ${url}`);
+            };
+            xhr.send();
+        }
+
+        // Translation Function
+        function translateDescription(description) {
+            var translationMap = {
+                'clear sky': 'Klarer Himmel',
+                'few clouds': 'Wenige Wolken',
+                'scattered clouds': 'Vereinzelte Wolken',
+                'broken clouds': 'Aufgelockerte Bewölkung',
+                'shower rain': 'Regenschauer',
+                'rain': 'Regen',
+                'thunderstorm': 'Gewitter',
+                'snow': 'Schnee',
+                'mist': 'Nebel'
+            };
+            return translationMap[description] || description;
+        }
+
+        // Call Data Fetching Functions Periodically
+        function fetchAndUpdateAllData() {
+            fetchWeatherData();
+            fetchData('/path/to/sensor1data', function(responseText) {
+                updatePlantData(responseText, 'temperature_hindu', 'moisture_hindu', 'light_hindu', 'conductivity_hindu', 'battery_hindu', 'temperatureChartHindu', 'moistureChartHindu');
+            });
+            fetchData('/path/to/sensor2data', function(responseText) {
+                updatePlantData(responseText, 'temperature_northern', 'moisture_northern', 'light_northern', 'conductivity_northern', 'battery_northern', 'temperatureChartNorthern', 'moistureChartNorthern');
+            });
+            fetchData('/path/to/sensor3data', function(responseText) {
+                updatePlantData(responseText, 'temperature_purple', 'moisture_purple', 'light_purple', 'conductivity_purple', 'battery_purple', 'temperatureChartPurple', 'moistureChartPurple');
+            });
+        }
+
+        // Update Plant Data
+        function updatePlantData(responseText, tempId, moistureId, lightId, conductivityId, batteryId, tempChartId, moistureChartId) {
+            var data = responseText.split('\n');
+            var temperature = '-';
+            var moisture = '-';
+            var light = '-';
+            var conductivity = '-';
+            var battery = '-';
+            var temperatureData = [];
+            var moistureData = [];
+            var labels = [];
+
+            data.forEach(function(item) {
+                var parts = item.split(': ');
+                if (parts.length === 2) {
+                    switch (parts[0]) {
+                        case 'Date/Time':
+                            labels.push(parts[1]);
+                            break;
+                        case 'Temperature':
+                            temperature = parts[1] + ' °C';
+                            temperatureData.push(parseFloat(parts[1]));
+                            break;
+                        case 'Moisture':
+                            moisture = parts[1] + ' %';
+                            moistureData.push(parseFloat(parts[1]));
+                            break;
+                        case 'Light':
+                            light = parts[1] + ' Lux';
+                            break;
+                        case 'Conductivity':
+                            conductivity = parts[1] + ' μS/cm';
+                            break;
+                        case 'Battery':
+                            battery = parts[1] + ' %';
+                            break;
+                    }
+                }
+            });
+
+            document.getElementById(tempId).innerText = temperature;
+            document.getElementById(moistureId).innerText = moisture;
+            document.getElementById(lightId).innerText = light;
+            document.getElementById(conductivityId).innerText = conductivity;
+            document.getElementById(batteryId).innerText = battery;
+
+            createChart(tempChartId, 'Temperature (°C)', temperatureData, labels, 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 1)', 0, 40);
+            createChart(moistureChartId, 'Moisture (%)', moistureData, labels, 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)', 0, 100);
+        }
+
+        fetchAndUpdateAllData();
+
+        setInterval(fetchAndUpdateAllData, 30000);
+    </script>
+</body>
+</html>
