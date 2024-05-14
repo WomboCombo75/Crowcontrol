@@ -3,7 +3,8 @@ A simple plant care control website featuring Xiaomi HHCC sensors
 
 This is my first Version of my small local Website that shows Weather Data for my Location and data from up to 3 Xiaomi HHCC Sensors in a nice and smooth way.
 
-![Website Dekstop](Pictures/Screenshot 2024-05-14 193959.png)
+![Website Dekstop](Pictures/Screenshot2024-05-14 193959.png)
+
 ![Website Mobile](Pictures/IMG_4454.PNG)
 
 ## How to use:
