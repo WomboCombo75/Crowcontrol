@@ -1,12 +1,40 @@
-### Growcontrol
+# Growcontrol
 A simple plant care control website featuring Xiaomi HHCC sensors
 
 This is my first Version of my small local Website that shows Weather Data for my Location and data from up to 3 Xiaomi HHCC Sensors in a nice and smooth way.
 
-# How to use:
+## How to use:
 -Run the fetch_weather and getXdata.py as a cronjob. 
 -Add the html file to your local Webserver 
 -Make sure that all the relating Paths are correct.
+
+### Adjustments
+
+The following Lines need to get changed with your specific filepaths or names
+
+Html file:
+6
+13
+92
+163
+191
+219
+278
+328
+331
+334
+
+
+feth_weather.py:
+5
+9
+
+getXdata.py:
+65
+69
+
+
+
 
 I recomment to run this project on an Raspberry Pi 3 or any that has Bluetooth.
 
