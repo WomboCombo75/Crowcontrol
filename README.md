@@ -3,10 +3,6 @@ A simple plant care control website featuring Xiaomi HHCC sensors
 
 This is my first Version of my small local Website that shows Weather Data for my Location and data from up to 3 Xiaomi HHCC Sensors in a nice and smooth way.
 
-![Website Desktop](Pictures/Screenshot2024-05-14.png)
-
-![Website Mobile](Pictures/IMG_4454.PNG)
-
 ## How to use:
 -Run the fetch_weather and getXdata.py as a cronjob. 
 -Add the html file to your local Webserver 
@@ -62,4 +58,10 @@ Hardware used:
 ## Contributing
 
 Feel free to contribute to this project by forking the repository and making a pull request...
+
+## Pictures
+
+![Website Desktop](Pictures/Screenshot2024-05-14.png)
+
+![Website Mobile](Pictures/IMG_4454.PNG)
 
